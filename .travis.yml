@@ -1,0 +1,20 @@
+sudo: required
+services:
+  - docker
+
+script:
+  - docker build --pull --cache-from "plate-api" --tag "plate-api" .
+
+after_script:
+  - docker images
+
+before_deploy:
+  - echo "$REGISTRY_PASS" | docker login -u "$REGISTRY_USER" --password-stdin "$REGISTRY"
+  - docker tag "plate-api" "${REGISTRY}/plate-api"
+
+deploy:
+  provider: script
+  skip_cleanup: true
+  script: docker push "${REGISTRY}/plate-api"
+  on:
+    branch: master
