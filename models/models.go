@@ -1,4 +1,4 @@
-package main
+package models
 
 // Todo an todo item
 type Todo struct {
@@ -14,9 +14,4 @@ type TodoList struct {
 	Title       string `json:"title"`
 	Description string `json:"description"`
 	Todos       []Todo `json:"todos"`
-}
-
-// Token jwt token
-type Token struct {
-	Token string `json:"token"`
 }
