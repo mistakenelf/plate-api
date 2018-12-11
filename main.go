@@ -1,10 +1,7 @@
 package main
 
 import (
-	"net/http"
-
 	"github.com/knipferrc/plate-api/handlers"
-	"github.com/knipferrc/plate-api/mocks"
 
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
@@ -23,14 +20,8 @@ func main() {
 		AllowHeaders:     []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},
 	}))
 
-	e.GET("/api/todo-lists", func(c echo.Context) error {
-		return c.JSON(http.StatusOK, mocks.TodoListsMock)
-	})
-
-	e.GET("/api/todo-lists/:id", func(c echo.Context) error {
-		return c.JSON(http.StatusOK, mocks.TodoListMock)
-	})
-
+	e.GET("/api/todo-lists", handlers.TodoListsHandler)
+	e.GET("/api/todo-lists/:id", handlers.TodoListHandler)
 	e.POST("/api/login", handlers.LoginHandler)
 
 	e.Logger.Fatal(e.Start(":5000"))
