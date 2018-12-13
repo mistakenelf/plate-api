@@ -7,7 +7,7 @@ import (
 	"github.com/labstack/echo"
 )
 
-// TodoListHandler returns a users todo list
-func TodoListHandler(c echo.Context) error {
+// GetTodoList returns a users todo list
+func GetTodoList(c echo.Context) error {
 	return c.JSON(http.StatusOK, mocks.TodoListMock)
 }

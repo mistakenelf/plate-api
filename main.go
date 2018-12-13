@@ -10,6 +10,7 @@ import (
 func main() {
 	e := echo.New()
 
+	// Middleware
 	e.Use(middleware.Secure())
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
@@ -17,12 +18,18 @@ func main() {
 		AllowCredentials: true,
 		AllowMethods:     []string{echo.GET, echo.HEAD, echo.PUT, echo.PATCH, echo.POST, echo.DELETE},
 		AllowOrigins:     []string{"http://localhost:8080", "https://plate-app.azurewebsites.net"},
-		AllowHeaders:     []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},
+		AllowHeaders:     []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept, echo.HeaderAuthorization},
 	}))
 
-	e.GET("/api/todo-lists", handlers.TodoListsHandler)
-	e.GET("/api/todo-lists/:id", handlers.TodoListHandler)
-	e.POST("/api/login", handlers.LoginHandler)
+	// Public routes
+	e.POST("/api/login", handlers.Login)
+
+	// Restricted routes
+	r := e.Group("/api")
+	r.Use(middleware.JWT([]byte("secret")))
+	r.GET("/todo-lists", handlers.GetTodoLists)
+	r.GET("/todo-lists/:id", handlers.GetTodoList)
+	r.GET("/me", handlers.GetUser)
 
 	e.Logger.Fatal(e.Start(":5000"))
 }

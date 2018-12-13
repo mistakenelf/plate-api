@@ -8,23 +8,24 @@ import (
 	"github.com/labstack/echo"
 )
 
-type userLoginData struct {
+// UserLoginInput form input from login
+type UserLoginInput struct {
 	Email    string
 	Password string
 }
 
-// LoginHandler handles user login and returns a JWT
-func LoginHandler(c echo.Context) error {
-	user := new(userLoginData)
+// Login handles user login and returns a JWT
+func Login(c echo.Context) error {
+	user := new(UserLoginInput)
 	c.Bind(&user)
+
 	if user.Email == "test@email.com" && user.Password == "password" {
 		// Create token
 		token := jwt.New(jwt.SigningMethodHS256)
 
 		// Set claims
 		claims := token.Claims.(jwt.MapClaims)
-		claims["name"] = "Boss Man"
-		claims["admin"] = true
+		claims["ID"] = "123lkj234324"
 		claims["exp"] = time.Now().Add(time.Hour * 72).Unix()
 
 		// Generate encoded token and send it as response.
@@ -32,10 +33,10 @@ func LoginHandler(c echo.Context) error {
 		if err != nil {
 			return err
 		}
+
 		return c.JSON(http.StatusOK, map[string]string{
 			"token": t,
 		})
 	}
-
 	return echo.ErrUnauthorized
 }
