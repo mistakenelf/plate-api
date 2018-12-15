@@ -1,25 +1,14 @@
 package main
 
 import (
-	"log"
-
 	"github.com/knipferrc/plate-api/app"
 	"github.com/knipferrc/plate-api/db/gorm"
-
-	"github.com/joho/godotenv"
+	"github.com/knipferrc/plate-api/env"
 )
 
 func main() {
-	// Initialize app
 	app.Init()
-
-	// Load .env file
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	// Initialize database
+	env.Init()
 	gorm.Init()
 
 	// Start server
