@@ -1,6 +1,6 @@
 package mocks
 
-import "github.com/knipferrc/plate-api/models"
+import "github.com/knipferrc/plate-api/app/models"
 
 // TodoListsMock mock todo lists data
 var TodoListsMock = []models.TodoList{
