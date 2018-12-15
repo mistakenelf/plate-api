@@ -4,8 +4,8 @@ import (
 	"log"
 	"os"
 
-    "github.com/knipferrc/plate-api/database"
-    "github.com/knipferrc/plate-api/handlers"
+	"github.com/knipferrc/plate-api/database"
+	"github.com/knipferrc/plate-api/handlers"
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
@@ -36,11 +36,12 @@ func main() {
 
 	// Connect to postgres
 	connStr := os.Getenv("DB_CONNECTION_STRING")
-	database.DBCon, err := gorm.Open("postgres", connStr)
+	database.DBCon, err = gorm.Open("postgres", connStr)
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer db.Close()
+
+	database.CreateTables()
 
 	// Public routes
 	e.POST("/api/v1/login", handlers.Login)
