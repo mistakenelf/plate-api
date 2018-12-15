@@ -1,16 +1,17 @@
 package main
 
 import (
-	"database/sql"
 	"log"
 	"os"
 
-	"github.com/knipferrc/plate-api/handlers"
+    "github.com/knipferrc/plate-api/database"
+    "github.com/knipferrc/plate-api/handlers"
 
+	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"github.com/joho/godotenv"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
-	_ "github.com/lib/pq"
 )
 
 func main() {
@@ -18,6 +19,9 @@ func main() {
 
 	// Load .env file
 	err := godotenv.Load()
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	// Middleware
 	e.Use(middleware.Secure())
@@ -32,24 +36,21 @@ func main() {
 
 	// Connect to postgres
 	connStr := os.Getenv("DB_CONNECTION_STRING")
-	db, err := sql.Open("postgres", connStr)
-	defer db.Close()
+	database.DBCon, err := gorm.Open("postgres", connStr)
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	// Add db to handlers
-	h := &handlers.Handler{DB: db}
+	defer db.Close()
 
 	// Public routes
-	e.POST("/api/login", h.Login)
+	e.POST("/api/v1/login", handlers.Login)
 
 	// Restricted routes
-	r := e.Group("/api")
+	r := e.Group("/api/v1")
 	r.Use(middleware.JWT([]byte("secret")))
-	r.GET("/todo-lists", h.GetTodoLists)
-	r.GET("/todo-lists/:id", h.GetTodoList)
-	r.GET("/me", h.GetUser)
+	r.GET("/todo-lists", handlers.GetTodoLists)
+	r.GET("/todo-lists/:id", handlers.GetTodoList)
+	r.GET("/me", handlers.GetUser)
 
 	e.Logger.Fatal(e.Start(":5000"))
 }

@@ -15,7 +15,7 @@ type UserLoginInput struct {
 }
 
 // Login handles user login and returns a JWT
-func (h *Handler) Login(c echo.Context) error {
+func Login(c echo.Context) error {
 	user := new(UserLoginInput)
 	c.Bind(&user)
 
