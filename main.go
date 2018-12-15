@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"os"
 
 	"github.com/knipferrc/plate-api/app"
 	"github.com/knipferrc/plate-api/db/gorm"
@@ -12,9 +13,11 @@ import (
 func main() {
 	app.Init()
 
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal(err)
+	if os.Getenv("APP_ENV") != "production" {
+		err := godotenv.Load()
+		if err != nil {
+			log.Fatal(err)
+		}
 	}
 
 	gorm.Init()
