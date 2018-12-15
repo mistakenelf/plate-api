@@ -8,6 +8,6 @@ import (
 )
 
 // GetTodoLists returns a users todo lists
-func GetTodoLists(c echo.Context) error {
+func (h *Handler) GetTodoLists(c echo.Context) error {
 	return c.JSON(http.StatusOK, mocks.TodoListsMock)
 }

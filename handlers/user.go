@@ -16,7 +16,7 @@ type User struct {
 }
 
 // GetUser returns the current user
-func GetUser(c echo.Context) error {
+func (h *Handler) GetUser(c echo.Context) error {
 	user := c.Get("user").(*jwt.Token)
 	claims := user.Claims.(jwt.MapClaims)
 	id := claims["ID"].(string)
