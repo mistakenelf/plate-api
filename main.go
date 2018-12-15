@@ -45,6 +45,7 @@ func main() {
 
 	// Public routes
 	e.POST("/api/v1/login", handlers.Login)
+	e.POST("/api/v1/register", handlers.Register)
 
 	// Restricted routes
 	r := e.Group("/api/v1")
