@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"fmt"
 	"net/http"
 	"time"
 
@@ -17,9 +16,8 @@ func Register(c echo.Context) error {
 	user := new(models.User)
 	c.Bind(&user)
 
-	fmt.Print(user)
-
 	pg.AddUser(user)
+
 	// Create token
 	token := jwt.New(jwt.SigningMethodHS256)
 
