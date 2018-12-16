@@ -7,5 +7,7 @@ import (
 
 // AddUser adds a new user to the database
 func AddUser(user *models.User) {
-	gorm.DBCon().Create(&user)
+	if err := gorm.DBCon().Create(&user).Error; err != nil {
+		panic(err)
+	}
 }
