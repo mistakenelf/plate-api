@@ -1,9 +1,13 @@
 package models
 
+import (
+	"github.com/jinzhu/gorm"
+)
+
 // Todo an todo item
 type Todo struct {
-	ID          string `json:"id"`
-	Name        string `json:"name"`
-	Description string `json:"description"`
-	Completed   bool   `json:"completed"`
+	gorm.Model
+	Name        string `gorm:"type:varchar(100)"`
+	Description string `gorm:"type:varchar(255)"`
+	Completed   bool   `gorm:"type:boolean"`
 }
