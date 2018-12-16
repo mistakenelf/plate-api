@@ -27,11 +27,10 @@ func Init() {
 	// Public routes
 	Server.POST("/api/v1/login", controllers.Login)
 	Server.POST("/api/v1/register", controllers.Register)
+	Server.POST("/api/v1/addTodo", controllers.AddTodo)
 
 	// Restricted routes
 	r := Server.Group("/api/v1")
 	r.Use(middleware.JWT([]byte("secret")))
-	r.GET("/todo-lists", controllers.GetTodoLists)
-	r.GET("/todo-lists/:id", controllers.GetTodoList)
 	r.GET("/me", controllers.GetUser)
 }
