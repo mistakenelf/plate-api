@@ -4,28 +4,36 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/knipferrc/plate-api/app/models"
+	"github.com/knipferrc/plate-api/db/pg"
+	"golang.org/x/crypto/bcrypt"
+
 	jwt "github.com/dgrijalva/jwt-go"
 	"github.com/labstack/echo"
 )
 
-// UserLoginInput form input from login
-type UserLoginInput struct {
+// LoginRequest login input
+type LoginRequest struct {
 	Email    string
 	Password string
 }
 
 // Login handles user login and returns a JWT
 func Login(c echo.Context) error {
-	user := new(UserLoginInput)
+	user := new(LoginRequest)
 	c.Bind(&user)
 
-	if user.Email == "test@email.com" && user.Password == "password" {
+	foundUser := pg.GetUserByEmail(user.Email)
+
+	passwordMatch := bcrypt.CompareHashAndPassword([]byte(foundUser.PasswordHash), []byte(user.Password))
+
+	if (foundUser != (models.User{})) && passwordMatch == nil {
 		// Create token
 		token := jwt.New(jwt.SigningMethodHS256)
 
 		// Set claims
 		claims := token.Claims.(jwt.MapClaims)
-		claims["ID"] = 1
+		claims["ID"] = foundUser.ID
 		claims["admin"] = false
 		claims["exp"] = time.Now().Add(time.Hour * 72).Unix()
 

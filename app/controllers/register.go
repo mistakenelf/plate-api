@@ -5,25 +5,47 @@ import (
 	"time"
 
 	"github.com/knipferrc/plate-api/app/models"
+
 	"github.com/knipferrc/plate-api/db/pg"
+	"golang.org/x/crypto/bcrypt"
 
 	jwt "github.com/dgrijalva/jwt-go"
 	"github.com/labstack/echo"
 )
 
+// Request regisger input
+type Request struct {
+	Email     string
+	Password  string
+	FirstName string
+	LastName  string
+}
+
 // Register handles user registration and returns a JWT
 func Register(c echo.Context) error {
-	user := new(models.User)
+	user := new(Request)
 	c.Bind(&user)
 
-	pg.CreateUser(user)
+	passwordHash, err := bcrypt.GenerateFromPassword([]byte(user.Password), bcrypt.DefaultCost)
+	if err != nil {
+		return err
+	}
+
+	newUser := &models.User{
+		Email:        user.Email,
+		PasswordHash: string(passwordHash),
+		FirstName:    user.FirstName,
+		LastName:     user.LastName,
+	}
+
+	pg.CreateUser(newUser)
 
 	// Create token
 	token := jwt.New(jwt.SigningMethodHS256)
 
 	// Set claims
 	claims := token.Claims.(jwt.MapClaims)
-	claims["ID"] = user.ID
+	claims["ID"] = newUser.ID
 	claims["admin"] = false
 	claims["exp"] = time.Now().Add(time.Hour * 72).Unix()
 

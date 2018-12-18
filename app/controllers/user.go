@@ -13,9 +13,9 @@ import (
 func GetUser(c echo.Context) error {
 	jwtToken := c.Get("user").(*jwt.Token)
 	claims := jwtToken.Claims.(jwt.MapClaims)
-	id := claims["ID"].(float64)
+	id := claims["ID"].(string)
 
-	user := pg.FindUser(id)
+	user := pg.GetUserByID(id)
 
 	return c.JSON(http.StatusOK, user)
 }
