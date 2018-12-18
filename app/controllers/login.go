@@ -25,7 +25,7 @@ func Login(c echo.Context) error {
 
 		// Set claims
 		claims := token.Claims.(jwt.MapClaims)
-		claims["ID"] = "123lkj234324"
+		claims["ID"] = 1
 		claims["admin"] = false
 		claims["exp"] = time.Now().Add(time.Hour * 72).Unix()
 

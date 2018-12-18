@@ -16,14 +16,14 @@ func Register(c echo.Context) error {
 	user := new(models.User)
 	c.Bind(&user)
 
-	pg.AddUser(user)
+	pg.CreateUser(user)
 
 	// Create token
 	token := jwt.New(jwt.SigningMethodHS256)
 
 	// Set claims
 	claims := token.Claims.(jwt.MapClaims)
-	claims["ID"] = "123lkj234324"
+	claims["ID"] = user.ID
 	claims["admin"] = false
 	claims["exp"] = time.Now().Add(time.Hour * 72).Unix()
 
