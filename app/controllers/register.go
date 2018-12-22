@@ -13,8 +13,8 @@ import (
 	"github.com/labstack/echo"
 )
 
-// Request regisger input
-type Request struct {
+// RegisterRequest regisger input
+type RegisterRequest struct {
 	Email     string
 	Password  string
 	FirstName string
@@ -23,7 +23,7 @@ type Request struct {
 
 // Register handles user registration and returns a JWT
 func Register(c echo.Context) error {
-	user := new(Request)
+	user := new(RegisterRequest)
 	c.Bind(&user)
 
 	passwordHash, err := bcrypt.GenerateFromPassword([]byte(user.Password), bcrypt.DefaultCost)

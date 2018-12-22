@@ -21,3 +21,13 @@ func GetTodoLists() []models.TodoList {
 	}
 	return todoLists
 }
+
+// GetTodoList returns a single todo list
+func GetTodoList(id string) models.TodoList {
+	var todoList models.TodoList
+	res := gorm.DBCon().Where("ID = ?", id).Preload("Todos").First(&todoList)
+	if res.RecordNotFound() {
+		panic(nil)
+	}
+	return todoList
+}
