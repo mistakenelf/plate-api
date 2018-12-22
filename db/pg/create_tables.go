@@ -8,4 +8,6 @@ import (
 // CreateTables sets up DB tables
 func CreateTables() {
 	gorm.DBCon().AutoMigrate(&models.User{})
+	gorm.DBCon().AutoMigrate(&models.TodoList{})
+	gorm.DBCon().AutoMigrate(&models.Todo{})
 }

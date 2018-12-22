@@ -11,7 +11,7 @@ var TodoListsMock = []models.TodoList{
 		Todos: []models.Todo{
 			models.Todo{
 				ID:          "1",
-				Name:        "Name",
+				Title:       "Name",
 				Description: "Description",
 				Completed:   false,
 			},
@@ -24,7 +24,7 @@ var TodoListsMock = []models.TodoList{
 		Todos: []models.Todo{
 			models.Todo{
 				ID:          "2",
-				Name:        "Name",
+				Title:       "Name",
 				Description: "Description",
 				Completed:   false,
 			},
@@ -37,7 +37,7 @@ var TodoListsMock = []models.TodoList{
 		Todos: []models.Todo{
 			models.Todo{
 				ID:          "1",
-				Name:        "Name",
+				Title:       "Name",
 				Description: "Description",
 				Completed:   false,
 			},
@@ -50,7 +50,7 @@ var TodoListsMock = []models.TodoList{
 		Todos: []models.Todo{
 			models.Todo{
 				ID:          "1",
-				Name:        "Name",
+				Title:       "Name",
 				Description: "Description",
 				Completed:   false,
 			},
@@ -63,7 +63,7 @@ var TodoListsMock = []models.TodoList{
 		Todos: []models.Todo{
 			models.Todo{
 				ID:          "1",
-				Name:        "Name",
+				Title:       "Name",
 				Description: "Description",
 				Completed:   false,
 			},

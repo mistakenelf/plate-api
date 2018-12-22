@@ -31,6 +31,7 @@ func Init() {
 	// Restricted routes
 	r := Server.Group("/api/v1")
 	r.Use(middleware.JWT([]byte("secret")))
+	r.POST("/todo-lists/add", controllers.AddTodoList)
 	r.GET("/todo-lists", controllers.GetTodoLists)
 	r.GET("/todo-lists/:id", controllers.GetTodoList)
 	r.GET("/me", controllers.GetUser)
