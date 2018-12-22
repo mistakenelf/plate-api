@@ -11,3 +11,13 @@ func AddTodoList(todoList *models.TodoList) {
 		panic(err)
 	}
 }
+
+// GetTodoLists returns users todo lists
+func GetTodoLists() []models.TodoList {
+	var todoLists []models.TodoList
+	res := gorm.DBCon().Limit(5).Preload("Todos").Find(&todoLists, &models.TodoList{})
+	if res.RecordNotFound() {
+		panic(nil)
+	}
+	return todoLists
+}
