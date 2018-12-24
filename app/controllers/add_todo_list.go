@@ -11,7 +11,7 @@ import (
 // AddTodoList adds a new todo list to the db
 func AddTodoList(c echo.Context) error {
 	todoList := new(models.TodoList)
-	c.Bind(&todoList)
+    c.Bind(&todoList)
 	pg.AddTodoList(todoList)
 	return c.JSON(http.StatusOK, todoList)
 }

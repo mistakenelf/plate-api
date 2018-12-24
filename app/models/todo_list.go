@@ -6,4 +6,5 @@ type TodoList struct {
 	Title       string `json:"title"`
 	Description string `json:"description"`
 	Todos       []Todo `json:"todos" gorm:"foreignkey:TodoListID"`
+	CreatedBy   string `json:"createdBy"`
 }
