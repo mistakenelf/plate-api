@@ -15,7 +15,7 @@ func AddTodoList(todoList *models.TodoList) {
 // GetTodoLists returns users todo lists
 func GetTodoLists(id string) []models.TodoList {
 	var todoLists []models.TodoList
-	res := gorm.DBCon().Limit(5).Where("created_by = ?", id).Preload("Todos").Find(&todoLists, &models.TodoList{})
+	res := gorm.DBCon().Where("created_by = ?", id).Preload("Todos").Find(&todoLists, &models.TodoList{})
 	if res.RecordNotFound() {
 		panic(nil)
 	}

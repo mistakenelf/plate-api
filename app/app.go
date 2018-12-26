@@ -35,4 +35,5 @@ func Init() {
 	r.GET("/todo-lists", controllers.GetTodoLists)
 	r.GET("/todo-lists/:id", controllers.GetTodoList)
 	r.GET("/me", controllers.GetUser)
+	r.GET("/dashboard", controllers.Dashboard)
 }

@@ -8,3 +8,17 @@ type User struct {
 	FirstName    string `json:"firstName"`
 	LastName     string `json:"lastName"`
 }
+
+// LoginRequest login input
+type LoginRequest struct {
+	Email    string
+	Password string
+}
+
+// RegisterRequest regisger input
+type RegisterRequest struct {
+	Email     string
+	Password  string
+	FirstName string
+	LastName  string
+}
