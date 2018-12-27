@@ -31,3 +31,8 @@ func GetTodoList(id string) models.TodoList {
 	}
 	return todoList
 }
+
+// DeleteTodo removes a todo item from a list
+func DeleteTodo(todo *models.Todo) {
+	gorm.DBCon().Delete(&todo)
+}

@@ -33,3 +33,11 @@ func GetTodoList(c echo.Context) error {
 	todoList := pg.GetTodoList(todoListID)
 	return c.JSON(http.StatusOK, todoList)
 }
+
+// DeleteTodo removes an todo from the database
+func DeleteTodo(c echo.Context) error {
+	todo := new(models.Todo)
+	c.Bind(&todo)
+	pg.DeleteTodo(todo)
+	return c.JSON(http.StatusNoContent, models.Todo{})
+}
