@@ -31,10 +31,22 @@ func Init() {
 	// Restricted routes
 	r := Server.Group("/api/v1")
 	r.Use(middleware.JWT([]byte("secret")))
-	r.POST("/todo-lists/add", controllers.AddTodoList)
-	r.GET("/todo-lists", controllers.GetTodoLists)
-	r.GET("/todo-lists/:id", controllers.GetTodoList)
+
+	// Me Routes
 	r.GET("/me", controllers.GetUser)
+
+	// Dashboard Routes
 	r.GET("/dashboard", controllers.Dashboard)
-	r.DELETE("/todo/delete", controllers.DeleteTodo)
+
+	// TodoList Routes
+	r.GET("/todo-lists", controllers.GetTodoLists)
+	r.POST("/todo-lists", controllers.AddTodoList)
+	r.DELETE("/todo-lists", controllers.DeleteTodoList)
+
+	// TodoList Details Routes
+	r.GET("/todo-lists/:id", controllers.GetTodoList)
+
+	// Todos Routes
+	r.DELETE("/todos", controllers.DeleteTodo)
+	r.PUT("/todos", controllers.UpdateTodo)
 }
