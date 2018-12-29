@@ -7,4 +7,5 @@ type TodoList struct {
 	Description string `json:"description"`
 	Todos       []Todo `json:"todos" gorm:"foreignkey:TodoListID"`
 	CreatedBy   string `json:"createdBy"`
+	Completed   bool   `json:"completed"`
 }

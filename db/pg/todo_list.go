@@ -37,3 +37,8 @@ func DeleteTodoList(todoList *models.TodoList) {
 	gorm.DBCon().Where("todo_list_id = ?", todoList.ID).Delete(&models.Todo{})
 	gorm.DBCon().Delete(&todoList)
 }
+
+// UpdateTodoList updates a todo list
+func UpdateTodoList(todoList *models.TodoList) {
+	gorm.DBCon().Save(&todoList)
+}

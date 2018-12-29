@@ -41,3 +41,11 @@ func DeleteTodoList(c echo.Context) error {
 	pg.DeleteTodoList(todoList)
 	return c.JSON(http.StatusNoContent, models.TodoList{})
 }
+
+// UpdateTodoList updates a todo list
+func UpdateTodoList(c echo.Context) error {
+	todoList := new(models.TodoList)
+	c.Bind(&todoList)
+	pg.UpdateTodoList(todoList)
+	return c.JSON(http.StatusOK, todoList)
+}
