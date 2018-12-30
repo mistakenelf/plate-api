@@ -7,4 +7,5 @@ type Todo struct {
 	Description string `json:"description"`
 	Completed   bool   `json:"completed"`
 	TodoListID  string `json:"todoListId"`
+	CreatedBy   string `json:"createdBy"`
 }
