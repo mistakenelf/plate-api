@@ -25,6 +25,8 @@ func GetUserByEmail(email string) models.User {
 // GetUserByID finds a user based on id
 func GetUserByID(id string) models.User {
 	var user models.User
-	gorm.DBCon().Where("ID = ?", id).First(&user)
+	if err := gorm.DBCon().Where("ID = ?", id).First(&user).Error; err != nil {
+		panic(err)
+	}
 	return user
 }

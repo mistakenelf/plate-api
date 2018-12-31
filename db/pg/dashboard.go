@@ -22,7 +22,9 @@ func GetTotals(id string) models.DashboardCounts {
 	var todoLists []models.TodoList
 	var todoListCount int16
 
-	gorm.DBCon().Where("created_by = ?", id).Find(&todoLists, &models.TodoList{}).Count(&todoListCount)
+	if err := gorm.DBCon().Where("created_by = ?", id).Find(&todoLists, &models.TodoList{}).Count(&todoListCount).Error; err != nil {
+		panic(err)
+	}
 
 	dashboardCounts := models.DashboardCounts{
 		TodoCount: todoListCount,

@@ -7,7 +7,15 @@ import (
 
 // CreateTables sets up DB tables
 func CreateTables() {
-	gorm.DBCon().AutoMigrate(&models.User{})
-	gorm.DBCon().AutoMigrate(&models.TodoList{})
-	gorm.DBCon().AutoMigrate(&models.Todo{})
+	if err := gorm.DBCon().AutoMigrate(&models.User{}).Error; err != nil {
+		panic(err)
+	}
+
+	if err := gorm.DBCon().AutoMigrate(&models.TodoList{}).Error; err != nil {
+		panic(err)
+	}
+
+	if err := gorm.DBCon().AutoMigrate(&models.Todo{}).Error; err != nil {
+		panic(err)
+	}
 }
