@@ -9,7 +9,7 @@ import (
 func GetDashboardTodoLists(id string) []models.TodoList {
 	var todoLists []models.TodoList
 
-	res := gorm.DBCon().Limit(5).Where("created_by = ?", id).Find(&todoLists, &models.TodoList{})
+	res := gorm.DBCon().Limit(4).Where("created_by = ?", id).Find(&todoLists, &models.TodoList{})
 	if res.RecordNotFound() {
 		panic(nil)
 	}
