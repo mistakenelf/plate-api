@@ -12,6 +12,6 @@ require (
 	github.com/mattn/go-isatty v0.0.4 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasttemplate v0.0.0-20170224212429-dcecefd839c4 // indirect
-	golang.org/x/crypto v0.0.0-20181203042331-505ab145d0a9
-	golang.org/x/sys v0.0.0-20181213200352-4d1cda033e06 // indirect
+	golang.org/x/crypto v0.0.0-20190103213133-ff983b9c42bc
+	golang.org/x/sys v0.0.0-20190108104531-7fbe1cd0fcc2 // indirect
 )
