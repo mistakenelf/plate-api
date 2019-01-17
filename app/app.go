@@ -34,20 +34,4 @@ func Init() {
 
 	// Me Routes
 	r.GET("/me", controllers.GetUser)
-
-	// Dashboard Routes
-	r.GET("/dashboard", controllers.Dashboard)
-
-	// TodoList Routes
-	r.GET("/todo-lists", controllers.GetTodoLists)
-	r.POST("/todo-lists", controllers.AddTodoList)
-	r.DELETE("/todo-lists", controllers.DeleteTodoList)
-	r.PUT("/todo-lists", controllers.UpdateTodoList)
-
-	// TodoList Details Routes
-	r.GET("/todo-lists/:id", controllers.GetTodoList)
-
-	// Todos Routes
-	r.DELETE("/todos", controllers.DeleteTodo)
-	r.PUT("/todos", controllers.UpdateTodo)
 }
