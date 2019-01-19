@@ -11,3 +11,13 @@ func CreateTask(task *models.Task) {
 		panic(err)
 	}
 }
+
+// GetTasks returns a users tasks
+func GetTasks(id string) []models.Task {
+	var tasks []models.Task
+	res := gorm.DBCon().Where("created_by = ?", id).Find(&tasks, &models.Task{})
+	if res.RecordNotFound() {
+		panic(nil)
+	}
+	return tasks
+}
