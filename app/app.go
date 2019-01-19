@@ -34,4 +34,7 @@ func Init() {
 
 	// Me Routes
 	r.GET("/me", controllers.GetUser)
+
+	// Tasks Routes
+	r.POST("/tasks/create", controllers.CreateTask)
 }

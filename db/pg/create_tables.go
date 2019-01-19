@@ -10,4 +10,8 @@ func CreateTables() {
 	if err := gorm.DBCon().AutoMigrate(&models.User{}).Error; err != nil {
 		panic(err)
 	}
+
+	if err := gorm.DBCon().AutoMigrate(&models.Task{}).Error; err != nil {
+		panic(err)
+	}
 }
