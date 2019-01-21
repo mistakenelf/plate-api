@@ -38,4 +38,6 @@ func Init() {
 	// Tasks Routes
 	r.POST("/tasks/create", controllers.CreateTask)
 	r.GET("/tasks", controllers.GetTasks)
+	r.GET("/tasks/:id", controllers.GetTaskDetails)
+	r.DELETE("/tasks/:id", controllers.DeleteTask)
 }

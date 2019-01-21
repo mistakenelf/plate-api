@@ -21,3 +21,23 @@ func GetTasks(id string) []models.Task {
 	}
 	return tasks
 }
+
+// GetTaskDetails returns a tasks deatils from the Db
+func GetTaskDetails(id string) models.Task {
+	var task models.Task
+	res := gorm.DBCon().Where("ID = ?", id).First(&task)
+	if res.RecordNotFound() {
+		panic(nil)
+	}
+	return task
+}
+
+// DeleteTask removes a task from the DB
+func DeleteTask(id string) models.Task {
+	var task models.Task
+	res := gorm.DBCon().Where("ID = ?", id).Delete(&task)
+	if res.RecordNotFound() {
+		panic(nil)
+	}
+	return task
+}

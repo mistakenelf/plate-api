@@ -23,7 +23,21 @@ func GetTasks(c echo.Context) error {
 	jwtToken := c.Get("user").(*jwt.Token)
 	claims := jwtToken.Claims.(jwt.MapClaims)
 	id := claims["ID"].(string)
-
 	tasks := pg.GetTasks(id)
+
 	return c.JSON(http.StatusOK, tasks)
+}
+
+// GetTaskDetails returns a tasks details
+func GetTaskDetails(c echo.Context) error {
+	taskID := c.Param("id")
+	task := pg.GetTaskDetails(taskID)
+	return c.JSON(http.StatusOK, task)
+}
+
+// DeleteTask deletes a task by id
+func DeleteTask(c echo.Context) error {
+	taskID := c.Param("id")
+	task := pg.DeleteTask(taskID)
+	return c.JSON(http.StatusOK, task)
 }
