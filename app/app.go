@@ -40,4 +40,5 @@ func Init() {
 	r.GET("/tasks", controllers.GetTasks)
 	r.GET("/tasks/:id", controllers.GetTaskDetails)
 	r.DELETE("/tasks/:id", controllers.DeleteTask)
+	r.PUT("/tasks/:id", controllers.UpdateTask)
 }

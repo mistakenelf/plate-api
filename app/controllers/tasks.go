@@ -41,3 +41,12 @@ func DeleteTask(c echo.Context) error {
 	task := pg.DeleteTask(taskID)
 	return c.JSON(http.StatusOK, task)
 }
+
+// UpdateTask updates a task
+func UpdateTask(c echo.Context) error {
+	task := new(models.Task)
+	c.Bind(task)
+	pg.UpdateTask(task)
+
+	return c.JSON(http.StatusOK, task)
+}

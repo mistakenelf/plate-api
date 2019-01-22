@@ -41,3 +41,10 @@ func DeleteTask(id string) models.Task {
 	}
 	return task
 }
+
+// UpdateTask updates a task in the DB
+func UpdateTask(task *models.Task) {
+	if err := gorm.DBCon().Save(&task).Error; err != nil {
+		panic(err)
+	}
+}
