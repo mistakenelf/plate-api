@@ -49,7 +49,6 @@ config :phoenix, :plug_init_mode, :runtime
 
 # Configure your database
 config :plate_api, PlateAPI.Repo,
-  url:
-    "postgres://ddccghjy:Mv_2GErM6Bco92Ai-jd-CCu9Yazaqm8L@elmer.db.elephantsql.com:5432/ddccghjy",
+  url: System.get_env("DATABASE_URL"),
   ssl: true,
   pool_size: 1
