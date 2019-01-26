@@ -1,8 +1,13 @@
-FROM golang
-COPY . /usr/src/app
-WORKDIR /usr/src/app
-ENV APP_ENV=production
-ENV DB_CONNECTION_STRING=$DB_CONNECTION_STRING
-RUN go build .
+FROM bitwalker/alpine-elixir-phoenix:latest
+
+# Set exposed ports
 EXPOSE 5000
-ENTRYPOINT /usr/src/app/plate-api
+ENV PORT=5000 MIX_ENV=prod
+
+# Cache elixir deps
+ADD mix.exs mix.lock ./
+RUN mix do deps.get, deps.compile
+
+ADD . .
+
+CMD ["mix", "phx.server"]
