@@ -44,7 +44,10 @@ defmodule PlateAPI.MixProject do
       {:absinthe, "~> 1.4"},
       {:absinthe_plug, "~> 1.4"},
       {:poison, "~> 3.1.0"},
-      {:cors_plug, "~> 2.0"}
+      {:cors_plug, "~> 2.0"},
+      {:comeonin, "~> 4.1"},
+      {:bcrypt_elixir, "~> 1.1"},
+      {:guardian, "~> 1.0"}
     ]
   end
 
