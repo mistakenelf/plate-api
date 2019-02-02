@@ -8,6 +8,8 @@ defmodule PlateAPIWeb.Router do
   scope "/api" do
     pipe_through :api
 
+    resources "/users", UserController, only: [:create, :show]
+
     forward "/graphql", Absinthe.Plug, schema: PlateAPIWeb.Schema
     forward "/graphiql", Absinthe.Plug.GraphiQL, schema: PlateAPIWeb.Schema
   end
