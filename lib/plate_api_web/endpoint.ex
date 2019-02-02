@@ -15,6 +15,8 @@ defmodule PlateAPIWeb.Endpoint do
     gzip: false,
     only: ~w(css fonts images js favicon.ico robots.txt)
 
+ plug CORSPlug, origin: ["http://localhost:3000", "https://plate-app.azurewebsites.net"]
+
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
   if code_reloading? do
